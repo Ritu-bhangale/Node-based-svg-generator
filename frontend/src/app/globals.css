@@ -1,0 +1,45 @@
+:root {
+  --bg: #fafafa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: #111827;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.node-plus-btn:hover {
+  border-color: #9ca3af !important;
+  background: #f9fafb !important;
+}
+
+.node-spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  border: 2px solid #d1d5db;
+  border-top-color: #6b7280;
+  animation: node-spin 800ms linear infinite;
+}
+
+@keyframes node-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
