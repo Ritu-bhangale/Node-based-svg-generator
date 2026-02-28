@@ -1,0 +1,8 @@
+# Diffusion benchmarking only. Isolated from svg-engine/StarVector.
+diffusers
+transformers
+accelerate
+safetensors
+torch
+torchvision
+pillow

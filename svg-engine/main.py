@@ -6,8 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from routes.generate import router as generate_router
-from routes.mutate import router as mutate_router
-from services.llm_provider import get_llm_metadata
+from services.starvector_service import starvector_service
 
 
 def _load_env_file() -> None:
@@ -41,15 +40,16 @@ app.add_middleware(
 )
 
 app.include_router(generate_router, prefix="", tags=["generate"])
-app.include_router(mutate_router, prefix="", tags=["mutate"])
 
 
 @app.on_event("startup")
-async def on_startup() -> None:
-    llm_meta = get_llm_metadata()
-    logger.info("startup.llm provider=%s model=%s", llm_meta["provider"], llm_meta["model"])
+async def startup_event() -> None:
+    logger.info("startup.starvector.load.begin")
+    starvector_service.load()
+    logger.info("startup.starvector.load.done device=%s", getattr(starvector_service, "device", None))
 
 
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
+
